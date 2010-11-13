@@ -29,15 +29,16 @@ function css3pie_admin() {
     ),
   );
 
- return system_settings_form($form);
-}
+  $form['css3pie_css_use_php_wrapper'] = array(
+    '#type' => 'select',
+    '#title' => t(),
+    '#description' => t(),
+    '#default_value' => variable_get('css3pie_css_use_php_wrapper', FALSE),
+    '#options' => array(
+      FALSE => t('No'),
+      TRUE => t('Yes'),
+    ),
+  );
 
-/**
- * @todo only accept css valide code...
- * 
- * @param <type> $form
- * @param <type> $form_state
- */
-function css3pie_admin_validate($form, &$form_state) {
-  //form_set_error('css3pie_css_selectors', t('testing'));
+ return system_settings_form($form);
 }

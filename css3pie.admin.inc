@@ -31,8 +31,8 @@ function css3pie_admin() {
 
   $form['css3pie_css_use_php_wrapper'] = array(
     '#type' => 'select',
-    '#title' => t(),
-    '#description' => t(),
+    '#title' => t('Use PHP wrapper'),
+    '#description' => t('old server doesnt have the right mime type for .htc files so you can use the php wraper to simulate it.'),
     '#default_value' => variable_get('css3pie_css_use_php_wrapper', FALSE),
     '#options' => array(
       FALSE => t('No'),
@@ -40,5 +40,11 @@ function css3pie_admin() {
     ),
   );
 
+  $form['#submit'][] = 'css3pie_admin_submit';
+  
  return system_settings_form($form);
+}
+
+function css3pie_admin_submit($form, &$form_state) {
+  dpm($form_state);
 }

@@ -6,18 +6,14 @@ a very simple Drupal module to implement the css3pie.com javascript to your drup
 make the css selectors configurable over ui. This module creates a real css file on drupal
 files folder and add them via drupal_add_css.
 
-You can use it also via a API function.
+The module also implement a hook_css3pie() so your module can provide css selectors like that.
 
-css3pie_add_pie($selectors, 'yourmodulename');
+hook_css3pie() {
+  return array('yourmodulename' => array(
+    '.class1', '.class2', '.class3',
+  ));
+}
 
-$selectors is a array with multible selectors
-
-$selectora = array(
-  array('selector' => '.myclass1'),
-  array('selector' => '.myclass2'),
-  array('selector' => '#myId1'),
-  array('selector' => '#myId1 > .myclass3'),
-);
 
 The result of the css is very simple:
 

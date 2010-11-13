@@ -46,5 +46,11 @@ function css3pie_admin() {
 }
 
 function css3pie_admin_submit($form, &$form_state) {
-  dpm($form_state);
+
+  // check if submit button was pressed and rebuild the css file
+  $op = isset($form_state['values']['op']) ? $form_state['values']['op'] : '';
+
+  if ($op == t('Save configuration')) {
+    _css3pie_build_css3pie_css();
+  }
 }

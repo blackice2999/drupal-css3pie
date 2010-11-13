@@ -73,8 +73,6 @@ function css3pie_preprocess_page(&$vars) {
   if ($path_to_css3pie_css_file) {
     drupal_add_css($path_to_css3pie_css_file);
   }
-
-  _css3pie_build_css3pie_css();
 }
 
 /**
@@ -111,8 +109,7 @@ function _css3pie_build_css3pie_css() {
       $output .= ',' . "\n";
     }
   }
-  // @TODO: PIE mode for pseudo htc file (php mode)
-  //$output .= implode(',', $output_values);
+
   $output .= "\n" . '{' . "\n" . '  behaviour: url('. base_path() . _css3pie_get_css3pie_library() .');' . "\n" . '}';
 
   return _css3pie_create_css3pie_css($output);

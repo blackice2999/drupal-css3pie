@@ -32,7 +32,7 @@ function css3pie_admin() {
   $form['css3pie_css_use_php_wrapper'] = array(
     '#type' => 'select',
     '#title' => t('Use PHP wrapper'),
-    '#description' => t('old server doesnt have the right mime type for .htc files so you can use the php wraper to simulate it.'),
+    '#description' => t('old server doesnt have the right mime type for .htc files so you can use the php wraper to simulate it. (uses the PIE.php from css3pie package).'),
     '#default_value' => variable_get('css3pie_css_use_php_wrapper', FALSE),
     '#options' => array(
       FALSE => t('No'),
@@ -40,17 +40,36 @@ function css3pie_admin() {
     ),
   );
 
-  $form['#submit'][] = 'css3pie_admin_submit';
-  
  return system_settings_form($form);
 }
 
+/**
+ * Rebuild the CSS file only on Save submit
+ *
+ * @param <type> $form
+ * @param <type> $form_state
+ */
 function css3pie_admin_submit($form, &$form_state) {
 
   // check if submit button was pressed and rebuild the css file
-  $op = isset($form_state['values']['op']) ? $form_state['values']['op'] : '';
-
+  // we must use "clicked_button" becaus values['op'] was unset by
+  // system_settings_form_submit.
+  $op = isset($form_state['clicked_button']['#value']) ? $form_state['clicked_button']['#value'] : '';
   if ($op == t('Save configuration')) {
     _css3pie_build_css3pie_css();
   }
+}
+
+/**
+ * Implements hook_form_alter()
+ * we need to run our css file building after the system_settings_form_submit handler
+ * has runned because we have new values and we read the variable with variable_get...
+ * 
+ * @param array $form
+ * @param <type> $form_state
+ */
+function css3pie_form_css3pie_admin_alter(&$form, &$form_state) {
+  // rebuild the css file after save of the new variables
+  // system_settings_form_submit must be run before we want to rebuild.
+  $form['#submit'][] = 'css3pie_admin_submit';
 }

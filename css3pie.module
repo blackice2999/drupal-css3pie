@@ -94,7 +94,6 @@ function _css3pie_build_css3pie_css() {
 
   // invoke hook_css3pie in all modules to get the selectors
   $css3pie_selectors = module_invoke_all('css3pie');
-  kpr($css3pie_selectors);
 
   $show_namespaces_as_comments = variable_get('css3pie_css_comment', TRUE);
   $cnt_namespaces = count($css3pie_selectors);
@@ -134,19 +133,13 @@ function _css3pie_create_css3pie_css($css = NULL) {
   
   $css3pie_css_path = file_create_path('css3pie');
 
-  // ensures the our css3pie directory is exists whithin files directory.
-  if(!file_check_directory($css3pie_css_path)) {
-    $css3pie_css_path = file_directory_path() . '/css3pie';
-    file_check_directory($css3pie_css_path, FILE_CREATE_DIRECTORY);
-  }
-
   // check again for error message
-  if(!file_check_directory($css3pie_css_path)) {
+  if(!file_check_directory($css3pie_css_path, FILE_CREATE_DIRECTORY)) {
     drupal_set_message(t('Unable to create CSS3PIE CSS Cache directory. Check permissions on your files directory.'), 'error');
     return;
   }
 
-  $filename = $css3pie_css_path . '/' . 'css3pie.css';
+  $filename = $css3pie_css_path . '/css3pie.css';
   $filename = file_save_data($css, $filename, FILE_EXISTS_REPLACE);
 
   return $filename;

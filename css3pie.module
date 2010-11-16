@@ -1,5 +1,5 @@
 <?php
-// $Id$
+// $Id: css3pie.module,v 1.1.2.1 2010/11/16 11:27:02 blackice2999 Exp $
 
 /**
  * @file css3pie.module
@@ -110,7 +110,7 @@ function _css3pie_build_css3pie_css() {
     }
   }
 
-  $output .= "\n" . '{' . "\n" . '  behaviour: url('. base_path() . _css3pie_get_css3pie_library() .');' . "\n" . '}';
+  $output .= "\n" . '{' . "\n" . '  behavior: url('. base_path() . _css3pie_get_css3pie_library() .');' . "\n" . '}';
 
   return _css3pie_create_css3pie_css($output);
 }

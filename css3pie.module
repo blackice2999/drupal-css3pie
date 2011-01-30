@@ -136,7 +136,7 @@ function _css3pie_build_css3pie_css() {
 
   foreach ($css3pie_selectors as $namespace => $selectors) {
     $i++;
-
+    
     if($show_namespaces_as_comments) {
       $output .= '/* ' . $namespace . ' */' . "\n";
     }
@@ -147,6 +147,8 @@ function _css3pie_build_css3pie_css() {
     }
   }
 
+  // Check if php wrapper mode is wanted...
+  // @TODO: add support for new PIE js mode...
   $css3mode = variable_get('css3pie_css_use_php_wrapper', 'htc');
   if ( $css3mode === 'htc' ) {
     $css3library = drupal_get_library('css3pie', 'css3pie_htc');
@@ -155,7 +157,7 @@ function _css3pie_build_css3pie_css() {
     $css3library = drupal_get_library('css3pie', 'css3pie_php');    
   }
 
-  // get file
+  // get file from library array because the filename is in the key..
   $css3file = '';
   foreach ($css3library['js'] as $file => $options) {
     $css3file = $file;

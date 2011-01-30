@@ -3,4 +3,4 @@
 name = CSS3PIE
 description = provides http://css3pie.com/ library support.
 package = progressive enhancements
-core = 6.x
+core = 7.x

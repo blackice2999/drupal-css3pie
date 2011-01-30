@@ -35,8 +35,8 @@ function css3pie_admin() {
     '#description' => t("old server doesn't have the right mime type for .htc files so you can use the php wrapper to simulate it (uses the PIE.php from css3pie package)."),
     '#default_value' => variable_get('css3pie_css_use_php_wrapper', FALSE),
     '#options' => array(
-      FALSE => t('No'),
-      TRUE => t('Yes'),
+      'htc' => t('No'),
+      'php' => t('Yes'),
     ),
   );
 
